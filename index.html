@@ -42,7 +42,7 @@
     <div id="score"></div>
     <script>
       // Fetch the quiz JSON file
-      fetch("https://github.com/octahate/USMLE_quiz/blob/master/questions.json")
+      fetch("https://raw.githubusercontent.com/octahate/USMLE_quiz/blob/master/questions.json")
         .then(response => response.json())
         .then(quiz => {
           let score = 0;
