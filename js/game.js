@@ -15,7 +15,7 @@ let availableQuestions = []
 let questions = [];
 
 // Fetch Questions API
-fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple")
+fetch("https://github.com/octahate/USMLE_quiz/blob/master/questions.json")
   .then( res => {
     return res.json()
   })
