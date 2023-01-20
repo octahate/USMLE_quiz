@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz Game</title>
+    <style>
+      /* Add some styling for the buttons */
+      .answer-button {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      /* Add some styling for the correct answer */
+      .correct-answer {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      /* Add some styling for the incorrect answer */
+      .incorrect-answer {
+        background-color: #f44336; /* Red */
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quiz Game</h1>
+    <div id="question"></div>
+    <div id="answers"></div>
+    <div id="score"></div>
+    <script>
+      // Fetch the quiz JSON file
+      fetch("https://github.com/octahate/USMLE_quiz/blob/master/questions.json")
+        .then(response => response.json())
+        .then(quiz => {
+          let score = 0;
+          // Display the questions
+          const questionEl = document.getElementById("question");
+          const answersEl = document.getElementById("answers");
+          const scoreEl = document.getElementById("score");
+          for (const question of quiz) {
+            questionEl.innerText = question.question;
+            answersEl.innerHTML = ''; // Clear the previous answers
+            // Display the answers as buttons
+            const choices = [question.choice1, question.choice2, question.choice3, question.choice4];
+            for (let i = 0; i < choices.length; i++) {
+              const button = document.createElement("button");
+  button.innerText = choices[i];
+  button.classList.add("answer-button");
+  button.onclick = function() {
+    if (i === question.answer-1) {
+      button.classList.add("correct-answer");
+      score++;
+      alert("Correct!");
+    } else {
+      button.classList.add("incorrect-answer");
+      alert("Incorrect!");
+    }
+    scoreEl.innerText = `Score: ${score}`;
+  };
+  answersEl.appendChild(button);
+}
+}
+console.log(`You got ${score} out of ${quiz.length} questions correct.`);
+});
+    </script>
+  </body>
+</html>
