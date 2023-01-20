@@ -41,40 +41,63 @@
     <div id="answers"></div>
     <div id="score"></div>
     <script>
-      // Fetch the quiz JSON file
-      fetch("https://raw.githubusercontent.com/octahate/USMLE_quiz/blob/master/questions.json")
-        .then(response => response.json())
-        .then(quiz => {
-          let score = 0;
-          // Display the questions
-          const questionEl = document.getElementById("question");
-          const answersEl = document.getElementById("answers");
-          const scoreEl = document.getElementById("score");
-          for (const question of quiz) {
-            questionEl.innerText = question.question;
-            answersEl.innerHTML = ''; // Clear the previous answers
-            // Display the answers as buttons
-            const choices = [question.choice1, question.choice2, question.choice3, question.choice4];
-            for (let i = 0; i < choices.length; i++) {
-              const button = document.createElement("button");
-  button.innerText = choices[i];
-  button.classList.add("answer-button");
-  button.onclick = function() {
-    if (i === question.answer-1) {
-      button.classList.add("correct-answer");
-      score++;
-      alert("Correct!");
-    } else {
-      button.classList.add("incorrect-answer");
-      alert("Incorrect!");
-    }
-    scoreEl.innerText = `Score: ${score}`;
-  };
-  answersEl.appendChild(button);
-}
-}
-console.log(`You got ${score} out of ${quiz.length} questions correct.`);
-});
+    let score = 0;
+    // Display
+    <script>
+    let score = 0;
+    // Display the questions
+    const questions = [
+      {
+        question: "What is the capital of France?",
+        choices: ["Paris", "Rome", "Madrid", "Berlin"],
+        answer: 1
+      },
+      {
+        question: "What is the capital of Italy?",
+        choices: ["Paris", "Rome", "Madrid", "Berlin"],
+        answer: 2
+      },
+      {
+        question: "What is the capital of Spain?",
+        choices: ["Paris", "Rome", "Madrid", "Berlin"],
+        answer: 3
+      }
+    ];
+    let currentQuestion = 0;
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const scoreEl = document.getElementById("score");
+
+    function displayQuestion() {
+      const question = questions[currentQuestion];
+      questionEl.innerText = question.question;
+      answersEl.innerHTML = "";
+      for (let i = 0; i < question.choices.length; i++) {
+        const button = document.createElement("button");
+        button.innerText = question.choices[i];
+        button.classList.add("answer-button");
+        button.onclick = function() {
+          if (i === question.answer) {
+            button.classList.add("correct-answer");
+            score++;
+            alert("Correct!");
+         
+            } else {
+              button.classList.add("incorrect-answer");
+              alert("Incorrect!");
+            }
+            scoreEl.innerText = "Score: " + score;
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+              displayQuestion();
+            } else {
+              alert("Quiz completed! Your score is: " + score);
+            }
+          };
+          answersEl.appendChild(button);
+        }
+      }
+      displayQuestion();
     </script>
   </body>
 </html>
